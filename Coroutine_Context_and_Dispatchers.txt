@@ -1,0 +1,3 @@
+Coroutine Context - це набір елементів:Job,Dispatcher
+launch - використовує батьківський context. Виконується в main потоці
+launch(Dispatchers.Unconfined)

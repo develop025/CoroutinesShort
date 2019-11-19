@@ -1,0 +1,15 @@
+job.cancel() - закрити роботу
+job.join() - чекає завершенння роботи
+job.cancelAndJoin() - послідовне виконання job.cancel() і job.join() 
+isActive - поле скоупа. true якщо скоуп не завершений і не закритий
+launch {
+    try {
+    } finally {
+    }
+} - finally викликається коли закрити скоуп (cancel())
+CoroutineScope(Dispatcher + Job) - CoroutineScope приймає на вхід CoroutineContext який складається з диспетчера та роботи
+Dispatcher - визначає політику потоків
+NonCancellable - контекст при якому не закривається робота після cancel(), а виконується до кінця.
+withTimeout(milisec) - блокує потік, виклкикає TimeoutCancellationException якщо робота не завершилась протягом вказаного періоду
+withTimeoutOrNull - те ж саме але повертає null, а не викликає TimeoutCancellationException
+ 
