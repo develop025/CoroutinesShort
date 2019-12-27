@@ -1,3 +1,36 @@
 Coroutine Context - це набір елементів:Job,Dispatcher
-launch - використовує батьківський context. Виконується в main потоці
-launch(Dispatchers.Unconfined)
+!! Всі launch запускаються у своєму scope.
+launch - використовує батьківський context (ПЕРЕВІРИТИ). Виконується в main потоці
+launch(Dispatchers.Unconfined) - Виконується в main потоці лише перший крок, всі наступні в іншому потоці
+launch(Dispatchers.Default)- Виконується в новому потоці
+launch(newSingleThreadContext("MyOwnThread")) - Виконується у обраному потоці
+
+Зміна потоків:
+newSingleThreadContext("Ctx1").use { ctx1 ->
+    newSingleThreadContext("Ctx2").use { ctx2 ->
+        runBlocking(ctx1) {
+            log("Started in ctx1")
+            withContext(ctx2) {
+                log("Working in ctx2")
+            }
+            log("Back to ctx1")
+        }
+    }
+}
+
+coroutineContext[Job] - поточна робота
+cancel - закриває всі дочірні роботи
+join - чекає завершення усіх дочірніх робіт
+context корутини може складатись з декількох елементів об'єднаних +. Наприклад:b launch(Dispatchers.Default + CoroutineName("test"))
+
+В Activity використовувати
+ private val mainScope = MainScope()
+    
+    fun destroy() {
+        mainScope.cancel()
+    }
+
+або
+    CoroutineScope by CoroutineScope(Dispatchers.Default)
+
+в другому варіанті launch можна викликати в будь якому місці класу

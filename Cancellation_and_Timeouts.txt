@@ -9,6 +9,7 @@ launch {
 } - finally викликається коли закрити скоуп (cancel())
 CoroutineScope(Dispatcher + Job) - CoroutineScope приймає на вхід CoroutineContext який складається з диспетчера та роботи
 Dispatcher - визначає політику потоків
+withContext - працює як runBlocking + працює з обраним контекстом
 NonCancellable - контекст при якому не закривається робота після cancel(), а виконується до кінця.
 withTimeout(milisec) - блокує потік, виклкикає TimeoutCancellationException якщо робота не завершилась протягом вказаного періоду
 withTimeoutOrNull - те ж саме але повертає null, а не викликає TimeoutCancellationException
