@@ -1,0 +1,31 @@
+Channel basics: канали використовують для обміну потоком значень. Працює між потоками.
+Channel схоже до BlockingQueue - перший прийшов, перший пішов
+channel.send - додати елемент до каналу
+channel.receive - отримати елемент
+channel.close() - сповіщення про завершення додавання
+
+produce - channel builder. Асинхронний.
+consumeEach - замінює forEach
+
+Pipelines:
+ - один корутин створює значення, а інший обробляє їх. Другий канал прицмає перший як параметр.
+
+coroutineContext.cancelChildren() - завершує виконання корутин
+iterator - можна використовувати замість produce. Необхідно замінити send на yield, receive на next, ReceiveChannel на Iterator
+pipeline - актуально використовувати з  Dispatchers.Default для задіяння усіх ядер CPU
+
+Fan-out:
+channel можна опрацьовувати в декількох потоках
+
+Fan-in:
+в channel моожна додавати значення з різних потоків
+
+Buffered channels:
+channel - має можливість буферизувати значення Channel<Int>(4). Після заповнення буфера не приймає нові значення.
+
+Channels are fair:
+ - корутини обробляють результати по черзі, без блокувань
+
+Ticker channels:
+ticker - канал який генерить елементи з періодичністю 
+

@@ -1,0 +1,84 @@
+Sequences
+flow - метод для формування колекцій. Не блокує виконання. Запам'ятовує значення.Є Cancelable - тобто можна примусово завершити 
+collect - читання колекції з flow 
+flatten - повертає послідовність з усіх елементів з усіх послідовностей в цій послідовності.
+flatMap - повертає єдину послідовність з елементів результату оператора transform
+
+Flow builders
+flow{}
+flowOf() - конструктор
+.asFlow() - перетворює collection або sequence в flow
+ 
+flattenConcat - перетворює потік потоків Flow<Flow<T>> у потік Flow<T>
+
+Intermediate flow operators
+map - Проміжний оператор. Перетворює flow, повертає змінений flow. Може викликати suspend
+
+Transform operator:
+filter - Проміжний оператор.перетворює flow, повертає елементи flow які підходять умові. Може викликати suspend
+transform - Проміжний оператор. Дозволяє запускати безліч emit в будь який час.
+
+Size-limiting operators:
+take - Проміжний оператор. Закриває виконання при досягненні ліміту.
+
+Terminal flow operators:
+toList - перетворення в колекцію
+toSet - перетворення в колекцію
+first
+single  - забезпечує що буде лише один елемент інакше IllegalStateException
+reduce - отримує значення і попередній результат.
+fold - те ж саме що reduce, але перша ітерація зі значенням самого методу 
+
+Flows are sequential:
+flow - послідовний
+	
+Flow context:
+flow колекція завжди виконується в контексті викликаючої корутини
+
+emit - випромінює з flow елемент
+
+Wrong emission withContext:
+emit з flow з одного контексту в інший(з одного потоку в інший) приводить до помилки IllegalStateException. Тобто emit працює лише в одному контексті
+
+flowOn operator: 
+flowOn - змінює контекст emit у flow. Неявно використову buffer()
+
+Buffering:
+buffer - оператор викликає паралельне виконання emit у flow і буферизацію результатів
+
+Conflation:
+conflate - оператор який видає лише недавні результати. Давніші будуть упущені.
+
+Processing the latest value:
+xxxLatest{value->} (наприклад collectLatest) - це collector, якщо при його виконанні приходить нове значення тоді поточне перезапускається з новим значенням 
+
+Composing multiple flows:
+zip - об'єднує в собі два flow. Співставляє значення по індексу
+сombine - об'єднує в собі два flow. Співставляє значення по отриманні і використовує лише останні значення.
+
+Flattening flows:
+flatMapConcat - як і flattenConcat - перетворює потік потоків Flow<Flow<T>> у потік Flow<T>. Але виконує в тілі і видає результат для наступних операторів
+flatMapMerge - об'єднує вхідні потоки і об'єднує їх значення в є линий потік. Виконує паралельне отримання результатів.
+flatMapLatest - працює як і collectLatest. Видаж останні результати.
+ 
+Flow exceptions::
+Collector try and catch: - можна використовувати  try catch
+Everything is caught:  - excaption - можена зловити на вищих рівнях
+
+Exception transparency::
+catch - flow оператор для опрацювання винятків. Не пропускає далі винятки. Ловить лише передуючі винятки.
+
+Catching declaratively::
+catch - замінює try catch блок
+
+Flow completion::
+Imperative finally block: try/catch finally
+Declarative handling:
+onCompletion - викликається при завершенні - може генерувати exception. Сам не обробляє exception
+Upstream exceptions only
+
+Launching flow:
+collect - збирє дані. Потік очікує завершення
+launchIn(experemental) - потік не очікує завершення
+
+

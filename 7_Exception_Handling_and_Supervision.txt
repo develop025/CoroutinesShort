@@ -1,0 +1,21 @@
+Exception propagation:
+exception з job на верх не передається 
+з deferred отримуємо через await
+
+CoroutineExceptionHandler:
+coroutineExceptionHandler - обробляє exception в job
+
+Cancellation and exceptions:
+CancellationException - ignored by handlers
+
+Exceptions aggregation:
+ - the first exception wins
+
+?????????????? Дослідити exception
+Supervision:
+SupervisorJob - job
+
+Supervision scope:
+
+Exceptions in supervised coroutines:
+
