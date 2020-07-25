@@ -69,11 +69,14 @@ Everything is caught:  - excaption - можена зловити на вищих
 Exception transparency::
 catch - flow оператор для опрацювання винятків. Не пропускає далі винятки. Ловить лише передуючі винятки.
 
+Transparent catch:
+check - викликає Exception за переданої умови
+
 Catching declaratively::
 catch - замінює try catch блок
 
 Flow completion::
-Imperative finally block: try/catch finally
+Imperative finally block: try/catch finally - finally блок спрацьовує
 Declarative handling:
 onCompletion - викликається при завершенні - може генерувати exception. Сам не обробляє exception
 Upstream exceptions only
