@@ -1,6 +1,12 @@
 Deferred - робота, тому можна закрити. неблокуюча. Повертає значення. .await() - щоб отримати значення.
+
 async - функція повертає Deferred
+
 async(start = CoroutineStart.LAZY) {} - LAZY. start() - для ініціалізації. не блокує, оскільки async.
+
+async і await() слід виконувати в одному scope. В іншому випадку при помилці між ними async буде виконуватись без потреби 
+
 GlobalScope.async - не suspend метод
+
 !Cancellation is always propagated through coroutines hierarchy
 
