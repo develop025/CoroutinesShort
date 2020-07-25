@@ -7,7 +7,7 @@ launch {
     } finally {
     }
 } - finally викликається коли закрити скоуп (cancel())
-CoroutineScope(Dispatcher + Job) - CoroutineScope приймає на вхід CoroutineContext який складається з диспетчера та роботи
+CoroutineScope(Dispatcher + job) - CoroutineScope приймає на вхід CoroutineContext який складається з диспетчера та роботи. job.cancel - зупиняє Scope
 Dispatcher - визначає політику потоків
 withContext - працює як runBlocking + працює з обраним контекстом
 NonCancellable - контекст при якому не закривається робота після cancel(), а виконується до кінця.
