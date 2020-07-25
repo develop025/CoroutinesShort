@@ -8,5 +8,5 @@ async і await() слід виконувати в одному scope. В інш�
 
 GlobalScope.async - не suspend метод
 
-!Cancellation is always propagated through coroutines hierarchy
+!Cancellation is always propagated through coroutines hierarchy - Exception спрацьовує через ієрархію корутинів
 
