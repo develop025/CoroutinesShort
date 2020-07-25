@@ -65,12 +65,13 @@ flatMapLatest - працює як і collectLatest. Видаж останні р
 Flow exceptions::
 Collector try and catch: - можна використовувати  try catch
 Everything is caught:  - excaption - можена зловити на вищих рівнях
+check(value <= 1) { "Collected $value" } - check викликає Exceptio за умови
 
 Exception transparency::
 catch - flow оператор для опрацювання винятків. Не пропускає далі винятки. Ловить лише передуючі винятки.
 
 Transparent catch:
-check - викликає Exception за переданої умови
+check - викликає Exception за переданої умови. Припиняє flow.
 
 Catching declaratively::
 catch - замінює try catch блок
@@ -85,4 +86,6 @@ Launching flow:
 collect - збирє дані. Потік очікує завершення
 launchIn(experemental) - потік не очікує завершення
 
-
+Flow cancellation checks:
+cancel() в collect - закриває flow і викликає Exception. flow не переривається
+cancellable() - перериває flow при cancel()
